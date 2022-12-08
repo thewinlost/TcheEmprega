@@ -10,7 +10,7 @@ import TabBarText from "../components/utils/TabBarText";
 //Screens
 import Home from "../screens/Home";
 import SecondScreen from "../screens/SecondScreen";
-import About from "../screens/About";
+import About from "../screens/Listar";
 import Profile from "../screens/Profile";
 import Loading from "../screens/utils/Loading";
 // Auth screens
@@ -59,6 +59,7 @@ const Main = () => {
     >
       <MainStack.Screen name="MainTabs" component={MainTabs} />
       <MainStack.Screen name="SecondScreen" component={SecondScreen} />
+
     </MainStack.Navigator>
   );
 };
