@@ -37,17 +37,29 @@ const Listar = () => {
       });
     // Unsubscribe from events when no longer in use
     return () => subscriber();
-  }, []);
+  }, []); 
 
 
 
 const Item = ({ item }) => (
-  <View style={MeuEstilo.item}>
-    <Text style={MeuEstilo.title}>{item.nome}</Text>
-   <Image source={{ uri: item.urlfoto}} style={MeuEstilo.image} /> 
-
-  </View>
+  <View style={MeuEstilo.alinhamentoLinha}>        
+  <Image style={MeuEstilo.image} source={{uri: item.urlfoto}} />
+  
+  {/* // coloca alinhamento em coluna justificado flex-start */}
+  <View style={MeuEstilo.alinhamentoColuna}>                            
+  <Text style={MeuEstilo.title}>{item.nome} </Text>  
+  <Text style={MeuEstilo.title}>{item.descricao}</Text>             
+ {/* fecha alinhamento colunas */}
+ </View>
+ {/* fecha alinhamento linhas */}
+ </View>
 );
+const ItemSeparatorView = () => {
+  return (
+      // Flat List Item Separator
+      <View style={MeuEstilo.separador}/>
+  );
+};
 
  
 
@@ -59,6 +71,8 @@ const Item = ({ item }) => (
       data={usuarios} 
       renderItem={renderItem} 
       keyExtractor={item => item.id} 
+      ItemSeparatorComponent={ItemSeparatorView}
+
       // refreshing={true}
       // onRefresh={() => {
       //   getGatos();
@@ -72,6 +86,7 @@ const Item = ({ item }) => (
  containerlistar: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: 'white',
   },
   item: {
      backgroundColor: 'white',
@@ -91,7 +106,20 @@ const Item = ({ item }) => (
   width: 80,
   height: 80,
   borderRadius: 80,
- }
+ },
+ alinhamentoLinha:{
+  flexDirection:'row', 
+  justifyContent: 'flex-start'
+},
+alinhamentoColuna:{
+  flexDirection:'column', 
+  justifyContent: 'flex-start'
+},
+separador:{
+  height: 1,
+  width: '100%',
+  backgroundColor: '#C8C8C8',
+}
  });
 
 export default Listar;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useNavigation} from "@react-navigation/core";
 import { View, Text, StyleSheet, Image, Button, Pressable, AlertButton, Alert, Modal, FlatList} from "react-native";
+import {TextInput} from "react-native-rapi-ui";
 // import firebaseConfig from "./firebase";
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/storage";
@@ -23,7 +24,6 @@ const Profile= function() { //antes era só function profile
   // The path of the picked image
   const [pickedImagePath, setPickedImagePath] = useState("");
   const [especialidades, setEspecialidades] = useState<Partial<Categoria>[]>([{}]);
- 
 
   const escolhefoto = ()=>{
 
@@ -49,6 +49,7 @@ const Profile= function() { //antes era só function profile
       onDismiss: () => {}
     }
   );
+  
   }
   useEffect(() => {
     const subscriber = firestore
@@ -63,7 +64,7 @@ const Profile= function() { //antes era só function profile
         }
       });
     return () => subscriber();
-  }, [usuario]);
+  }, [usuario.urlfoto]);
   
   useEffect(() => {
     const subscriber = firestore.collection('Usuario')
@@ -83,6 +84,16 @@ const Profile= function() { //antes era só function profile
     return () => subscriber();
   }, []);
 
+  const salvar= ()=>{
+    const reference = firestore.collection("Usuario").doc(auth.currentUser.uid);
+    reference.update({
+       id: reference.id,
+       nome: usuario.nome,
+       telefone: usuario.telefone,
+       descricao: usuario.descricao,
+       urlfoto:usuario.urlfoto,
+     }).then(()=>{alert('Salvo com sucesso')}).catch(error=>alert(error.message))
+  }
 
 
   // This function is triggered when the "Select an image" button pressed
@@ -157,13 +168,13 @@ const Profile= function() { //antes era só function profile
     }
       
   };
-  const LongClick=(item)=>{
-    alert('voce pressionou longo e '+ item.categoria);
-  
+  const LongClick=async (item)=>{
+    const reference = await firestore.collection("Usuario").doc(auth.currentUser.uid).collection('Especialidade').doc(item.id).delete();
+    
 }
 
 const ShortClick=(item)=>{
-alert('voce pressionou curto e '+ item.categoria);
+alert('Para excluir a categoria pressione por 3 segundos');
 
 }
   const renderItem = ({ item })=> {
@@ -228,6 +239,28 @@ alert('voce pressionou curto e '+ item.categoria);
             )}
       </View>
       </Pressable>
+          <TextInput 
+          containerStyle={{ marginTop: 15, marginRight: 30, marginLeft:30, marginBottom: 15}}
+          placeholder="Nome"
+          value={usuario.nome}
+          onChangeText={text => setUsuario({...usuario, nome: text})}
+          keyboardType="default"
+        />
+        <TextInput 
+          containerStyle={{ marginTop: 15, marginRight: 30, marginLeft:30, marginBottom: 15}}
+          placeholder="Telefone"
+          value={usuario.telefone} 
+          onChangeText={text => setUsuario({...usuario, telefone: text})}
+          keyboardType="default"
+        />
+        <TextInput 
+          containerStyle={{ marginTop: 15, marginRight: 30, marginLeft:30, marginBottom: 15}}
+          placeholder="Descrição"
+          value={usuario.descricao} 
+          onChangeText={text => setUsuario({...usuario, descricao: text})}
+          keyboardType="default"
+        />
+      
       <Pressable style={[styles.button, styles.buttonOpen]} 
       onPress={() => setModalListaVisible(true)}>
         <Text style={styles.textStyle}>Abrir Lista</Text>
@@ -237,9 +270,9 @@ alert('voce pressionou curto e '+ item.categoria);
       renderItem={renderItem} 
       keyExtractor={item => item.id} 
       />
-      <Button title= "Go to second screen"
+      <Button title= "Salvar alterações"
           onPress={() => {
-              navigation.navigate("SecondScreen");
+              salvar();
           }}
           style={{
               marginTop: 10,
@@ -326,6 +359,14 @@ const styles = StyleSheet.create({
    fontSize: 16,
    color: '#0782F9',
    fontWeight: '700',
+},
+alinhamentoLinha:{
+    flexDirection:'row', 
+    justifyContent: 'flex-start'
+},
+alinhamentoColuna:{
+    flexDirection:'column', 
+    justifyContent: 'flex-start'
 },
   
 });

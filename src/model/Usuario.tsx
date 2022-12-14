@@ -5,6 +5,7 @@ export class Usuario {
     public urlfoto : string;
     public nome: string;
     public telefone: string;
+    public descricao : string;
 
     constructor(obj?: Partial<Usuario>) {
         if (obj) {
@@ -13,6 +14,7 @@ export class Usuario {
             this.urlfoto = obj.urlfoto
             this.nome = obj.nome
             this.telefone= obj.telefone
+            this.descricao = obj.descricao
         }
     }
 
@@ -23,6 +25,7 @@ export class Usuario {
             "email": "${this.email}",
             "urlfoto": "${this.urlfoto}"
             "telefone": "${this.telefone}"
+            "descricao": "${this.descricao}"
         }`
 
         //const fields = Object.values(this).join(', ')

@@ -73,7 +73,7 @@ const MainTabs = () => {
         headerShown: false,
         tabBarStyle: {
           borderTopColor: isDarkmode ? themeColor.dark100 : "#c0c0c0",
-          backgroundColor: isDarkmode ? themeColor.dark200 : "#ffffff",
+          backgroundColor: isDarkmode ? themeColor.dark200 : "#006400",
         },
       }}
     >
@@ -91,7 +91,7 @@ const MainTabs = () => {
         }}
       />
       <Tabs.Screen
-        name="Profile"
+        name="Perfil"
         component={Profile}
         options={{
           tabBarLabel: ({ focused }) => (
@@ -103,7 +103,7 @@ const MainTabs = () => {
         }}
       />
       <Tabs.Screen
-        name="About"
+        name="Usuários"
         component={About}
         options={{
           tabBarLabel: ({ focused }) => (
