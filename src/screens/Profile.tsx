@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {useNavigation} from "@react-navigation/core";
-import { View, Text, StyleSheet, Image, Button, Pressable, AlertButton, Alert, Modal, FlatList} from "react-native";
+import { View, Text, StyleSheet, Image, Button, Pressable, AlertButton, TouchableOpacity, Alert, Modal, FlatList} from "react-native";
 import {TextInput} from "react-native-rapi-ui";
 // import firebaseConfig from "./firebase";
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/storage";
 // const app = firebase.initializeApp(firebaseConfig);
 import { storage, auth, firestore } from "../navigation/firebase";
+import { FlatGrid } from 'react-native-super-grid';
 import { getStorage, uploadBytes } from "firebase/storage"; //access the storage databaSse
 import * as ImagePicker from "expo-image-picker";
-import {Categoria} from '../model/Categoria';
-import {Usuario} from '../model/Usuario';
+import {Categoria} from 'model/Categoria';
+import {Usuario} from 'model/Usuario';
 import ListarCategoria from './ListarCategoria';
+
 
 const Profile= function() { //antes era só function profile
   const navigation =useNavigation();
@@ -177,7 +179,7 @@ const ShortClick=(item)=>{
 alert('Para excluir a categoria pressione por 3 segundos');
 
 }
-  const renderItem = ({ item })=> {
+/*const renderItem = ({ item })=> {
     return <View style={styles.item} key={item.id}>
     <Pressable
     style={({ pressed }) => [{ backgroundColor: pressed ? '#f1f1f1' : 'transparent' }, styles.title]}
@@ -191,12 +193,10 @@ alert('Para excluir a categoria pressione por 3 segundos');
     </View>
     </Pressable>
     </View>
-    }
+    }*/
 
   return (
     <View style={styles.screen}>
-      <View style={styles.centeredView}></View>
-      <View style={styles.buttonContainer}></View>
 
         {/* MODAL DA LISTA */}
 
@@ -263,22 +263,43 @@ alert('Para excluir a categoria pressione por 3 segundos');
       
       <Pressable style={[styles.button, styles.buttonOpen]} 
       onPress={() => setModalListaVisible(true)}>
-        <Text style={styles.textStyle}>Abrir Lista</Text>
+        <Text style={styles.textStyle}>Selecionar especialidades</Text>
       </Pressable>
-      <FlatList 
+      
+
+     
+      <FlatGrid
+      itemDimension={99}
       data={especialidades} 
-      renderItem={renderItem} 
-      keyExtractor={item => item.id} 
-      />
-      <Button title= "Salvar alterações"
+      style={styles.gridView}
+      spacing={1}
+      renderItem={({ item }) => (
+        <Pressable
+                style={({ pressed }) => [{ backgroundColor: pressed ? '#4e8264' : 'transparent' }, styles.listItem]}
+                onLongPress={() => LongClick(item)}
+                onPress={() => { ShortClick(item) }}
+         >
+        <View style={[styles.itemContainer, { backgroundColor: '#4e8264'}]}>
+         <Text style={styles.text}>{item.categoria}</Text>
+        </View>
+        </Pressable>
+      )
+      }/>
+
+      
+    
+      <TouchableOpacity
+          style={styles.loginScreenButton}
           onPress={() => {
-              salvar();
-          }}
-          style={{
-              marginTop: 10,
-          }}
-      />
+            salvar();
+        }}
+          underlayColor='#fff'>
+          <Text style={styles.loginText}>Salvar alterações</Text>
+      </TouchableOpacity>
+     
+     
     </View>
+    
   );
 }
 
@@ -300,10 +321,35 @@ const styles = StyleSheet.create({
     borderRadius: 200 / 2,
     resizeMode: "cover",
   },
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 3,
+    justifyContent: 'center'
+    
+},
   buttonContainer: {
     width: 300,
     flexDirection: "row",
     justifyContent: "space-around",
+    backgroundColor: '#0d4023',
+  },
+  loginScreenButton:{
+    marginRight:40,
+    marginLeft:40,
+    marginTop:10,
+    paddingTop:10,
+    paddingBottom:10,
+    backgroundColor:'#0d4023',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  loginText:{
+      color:'#fff',
+      textAlign:'center',
+      paddingLeft : 10,
+      paddingRight : 10
   },
   centeredView: {
     flex: 1,
@@ -323,24 +369,35 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 4,
+    shadowRadius: 20,
     elevation: 5,
   },
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    backgroundColor: '#0d4023',
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#0d4023',
+    justifyContent: 'center',     
+    borderRadius: 5,
+    padding: 3,
+    height: 45,
+    width: 350,
+    marginTop: 15, 
+    marginRight: 30, 
+    marginLeft:30,
+    marginBottom: 15
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#0d4023',
   },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+    fontSize: 18,
   },
   modalText: {
     marginBottom: 15,
@@ -351,22 +408,44 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
-   borderColor: '#0782F9',
+  
 //     borderWidth: 2,
 //     borderRadius: 10,
  },
- title: {
-   fontSize: 16,
-   color: '#0782F9',
-   fontWeight: '700',
-},
-alinhamentoLinha:{
+
+/*/alinhamentoLinha:{
     flexDirection:'row', 
-    justifyContent: 'flex-start'
+    justifyContent: "space-between",
+    
 },
 alinhamentoColuna:{
     flexDirection:'column', 
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+   
+   
+},*/
+gridView: {
+  marginTop: 10,
+  flex: 1,
+},
+itemContainer: {
+  justifyContent: 'flex-end',
+  borderRadius: 50,
+  padding: 3,
+  height: 30,
+  width: 110,
+  alignItems: 'center'
+},
+itemCode: {
+  fontWeight: '600',
+  fontSize: 5,
+  color: '#fff',
+},
+text: {
+  color: "white",
+  fontSize: 9,
+  lineHeight: 16,
+  textAlign: "center",
 },
   
 });

@@ -9,7 +9,7 @@ import TabBarIcon from "../components/utils/TabBarIcon";
 import TabBarText from "../components/utils/TabBarText";
 //Screens
 import Home from "../screens/Home";
-import SecondScreen from "../screens/SecondScreen";
+import ProfileEstatico from "../screens/ProfileEstatico";
 import About from "../screens/Listar";
 import Profile from "../screens/Profile";
 import Loading from "../screens/utils/Loading";
@@ -58,7 +58,7 @@ const Main = () => {
       }}
     >
       <MainStack.Screen name="MainTabs" component={MainTabs} />
-      <MainStack.Screen name="SecondScreen" component={SecondScreen} />
+      <MainStack.Screen name="ProfileEstatico" component={ProfileEstatico} />
 
     </MainStack.Navigator>
   );
@@ -72,8 +72,8 @@ const MainTabs = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          borderTopColor: isDarkmode ? themeColor.dark100 : "#c0c0c0",
-          backgroundColor: isDarkmode ? themeColor.dark200 : "#006400",
+          borderTopColor: isDarkmode ? themeColor.dark100 : "#c0c020",
+          backgroundColor: isDarkmode ? themeColor.dark200 : "#0d4023",
         },
       }}
     >
@@ -83,10 +83,10 @@ const MainTabs = () => {
         component={Home}
         options={{
           tabBarLabel: ({ focused }) => (
-            <TabBarText focused={focused} title="Home" />
+            <TabBarText focused={focused} title="Configurações" />
           ),
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} icon={"md-home"} />
+            <TabBarIcon focused={focused} icon={"settings"} />
           ),
         }}
       />
@@ -95,7 +95,7 @@ const MainTabs = () => {
         component={Profile}
         options={{
           tabBarLabel: ({ focused }) => (
-            <TabBarText focused={focused} title="Profile" />
+            <TabBarText focused={focused} title="Perfil" />
           ),
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} icon={"person"} />
@@ -103,14 +103,14 @@ const MainTabs = () => {
         }}
       />
       <Tabs.Screen
-        name="Usuários"
+        name="Settings"
         component={About}
         options={{
           tabBarLabel: ({ focused }) => (
-            <TabBarText focused={focused} title="About" />
+            <TabBarText focused={focused} title="Freelancers" />
           ),
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} icon={"ios-information-circle"} />
+            <TabBarIcon focused={focused} icon={"hammer"} />
           ),
         }}
       />

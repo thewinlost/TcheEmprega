@@ -50,13 +50,13 @@ export default function ({ navigation }) {
               flex: 1,
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: isDarkmode ? "#17171E" : themeColor.white100,
+              backgroundColor: "#9AB1a3",
             }}
           >
             <Image
               resizeMode="contain"
               style={{
-                height: 220,
+                height: 120,
                 width: 220,
               }}
               source={require("../../../assets/login.png")}
@@ -83,7 +83,7 @@ export default function ({ navigation }) {
             <Text>Email</Text>
             <TextInput
               containerStyle={{ marginTop: 15 }}
-              placeholder="Enter your email"
+              placeholder="Insira seu email"
               value={email}
               autoCapitalize="none"
               autoCompleteType="off"
@@ -92,10 +92,10 @@ export default function ({ navigation }) {
               onChangeText={(text) => setEmail(text)}
             />
 
-            <Text style={{ marginTop: 15 }}>Password</Text>
+            <Text style={{ marginTop: 15 }}>Senha</Text>
             <TextInput
               containerStyle={{ marginTop: 15 }}
-              placeholder="Enter your password"
+              placeholder="Insira sua senha"
               value={password}
               autoCapitalize="none"
               autoCompleteType="off"
@@ -103,7 +103,9 @@ export default function ({ navigation }) {
               secureTextEntry={true}
               onChangeText={(text) => setPassword(text)}
             />
+            
             <Button
+              color= "#4e8264"
               text={loading ? "Loading" : "Continue"}
               onPress={() => {
                 login();
@@ -111,6 +113,7 @@ export default function ({ navigation }) {
               
               style={{
                 marginTop: 20,
+                
               }}
               disabled={loading}
             />
@@ -136,7 +139,7 @@ export default function ({ navigation }) {
                     marginLeft: 5,
                   }}
                 >
-                  Register here
+                  Registre-se aqui
                 </Text>
               </TouchableOpacity>
             </View>
@@ -154,7 +157,7 @@ export default function ({ navigation }) {
                 }}
               >
                 <Text size="md" fontWeight="bold">
-                  Forget password
+                  Esqueceu a senha? Clique Aqui
                 </Text>
               </TouchableOpacity>
             </View>

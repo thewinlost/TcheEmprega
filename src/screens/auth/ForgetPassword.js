@@ -48,13 +48,13 @@ export default function ({ navigation }) {
               flex: 1,
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: isDarkmode ? "#17171E" : themeColor.white100,
+              backgroundColor: "#9AB1a3",
             }}
           >
             <Image
               resizeMode="contain"
               style={{
-                height: 220,
+                height: 120,
                 width: 220,
               }}
               source={require("../../../assets/forget.png")}
@@ -90,6 +90,7 @@ export default function ({ navigation }) {
               onChangeText={(text) => setEmail(text)}
             />
             <Button
+            color= "#4e8264"
               text={loading ? "Loading" : "Send email"}
               onPress={() => {
                 forget();

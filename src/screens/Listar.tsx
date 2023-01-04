@@ -12,7 +12,7 @@ import {
   Image,
 } from 'react-native';
 import { storage, auth, firestore } from "../navigation/firebase";
-import {Usuario} from "../model/Usuario"
+import {Usuario} from "model/Usuario"
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 
@@ -48,7 +48,7 @@ const Item = ({ item }) => (
   {/* // coloca alinhamento em coluna justificado flex-start */}
   <View style={MeuEstilo.alinhamentoColuna}>                            
   <Text style={MeuEstilo.title}>{item.nome} </Text>  
-  <Text style={MeuEstilo.title}>{item.descricao}</Text>             
+  <Text style={MeuEstilo.describe}>{item.descricao}</Text>             
  {/* fecha alinhamento colunas */}
  </View>
  {/* fecha alinhamento linhas */}
@@ -84,41 +84,62 @@ const ItemSeparatorView = () => {
 
  const MeuEstilo = StyleSheet.create({
  containerlistar: {
-    flex: 1,
     marginTop: StatusBar.currentHeight || 0,
     backgroundColor: 'white',
+    flex: 1,
+    borderRadius: 10, //tela branca do fundo
+    padding: 30,
+    marginvertical: 8,
+    marginhorizontal: 16,
   },
   item: {
      backgroundColor: 'white',
-     padding: 20,
+     padding: 50,
      marginVertical: 8,
      marginHorizontal: 16,
-    borderColor: '#0782F9',
+    borderColor: 'pink',
 //     borderWidth: 2,
 //     borderRadius: 10,
   },
   title: {
-    fontSize: 16,
-    color: '#0782F9',
-    fontWeight: '700',
+    fontSize: 20,
+    color: '#0d4023',
+    fontWeight: '500',
+   
+ 
  },
+ describe: {
+  fontSize: 12,
+  color: '#0d4023',
+  fontWeight: '500',
+  textAlign: 'center',
+},
  image:{
-  width: 80,
-  height: 80,
-  borderRadius: 80,
+  width: 85,
+  height: 85,
+  borderRadius: 85,
+ 
  },
  alinhamentoLinha:{
-  flexDirection:'row', 
-  justifyContent: 'flex-start'
+  flexDirection: 'row',
+  justifyContent: 'flex-start',
+  padding: 10,
+  //backgroundColor: '#4e8264',
+  backgroundColor: '#9ab4a0',
+  borderRadius: 10,
+ 
 },
 alinhamentoColuna:{
   flexDirection:'column', 
-  justifyContent: 'flex-start'
+  justifyContent: 'center',
+
+
 },
 separador:{
-  height: 1,
+  height: 20,
   width: '100%',
-  backgroundColor: '#C8C8C8',
+  backgroundColor: "white"
+  //backgroundColor: '#C8C8C8',
 }
  });
 

@@ -74,13 +74,16 @@ export default function  ({ navigation }) {
               flex: 1,
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: isDarkmode ? "#17171E" : themeColor.white100,
+              backgroundColor:  "#9AB1a3",
+              
+              
+              //backgroundColor:  "#9AB4a3",
             }}
           >
             <Image
               resizeMode="contain"
               style={{
-                height: 220,
+                height: 120,
                 width: 220,
               }}
               source={require("../../../assets/register.png")}
@@ -116,7 +119,7 @@ export default function  ({ navigation }) {
               onChangeText={(text) => setEmail(text)}
             />
 
-            <Text style={{ marginTop: 15 }}>Password</Text>
+            <Text style={{ marginTop: 15 }}>Senha</Text>
             <TextInput
               containerStyle={{ marginTop: 15 }}
               placeholder="Insira sua senha"
@@ -149,7 +152,8 @@ export default function  ({ navigation }) {
         />
             
             <Button
-              text={loading ? "Loading" : "Create an account"}
+              color= "#4e8264"
+              text={loading ? "Loading" : "Criar conta"}
               onPress={() => {
                 handleSignUp();
               }}
@@ -170,7 +174,7 @@ export default function  ({ navigation }) {
               <Text size="md">Já possui uma conta?</Text>
               <TouchableOpacity
               onPress={() => {
-                navigation.navigate("SecondScreen");
+                navigation.navigate("Login");
               }}
               >
                 <Text

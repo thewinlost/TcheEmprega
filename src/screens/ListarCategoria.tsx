@@ -12,7 +12,7 @@ import {
   Image,
 } from 'react-native';
 import { storage, auth, firestore } from "../navigation/firebase";
-import {Categoria} from "../model/Categoria"
+import {Categoria} from "model/Categoria"
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 
@@ -68,8 +68,7 @@ const ListarCategoria = (props) => {
     onPress={() => { ShortClick(item) }}
     >
     <View>
-    <Text style={MeuEstilo.id}>Id: {item.id}</Text>
-    <Text style={MeuEstilo.title}>Nome: {item.categoria}</Text>
+    <Text style={MeuEstilo.title}>{item.categoria}</Text>
     </View>
     </Pressable>
     </View>
@@ -96,19 +95,20 @@ const ListarCategoria = (props) => {
  containerlistar: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    justifyContent: 'flex-end'
   },
   item: {
      backgroundColor: 'white',
      padding: 20,
      marginVertical: 8,
      marginHorizontal: 16,
-    borderColor: '#0782F9',
+    borderColor: '#0d4023',
 //     borderWidth: 2,
 //     borderRadius: 10,
   },
   title: {
     fontSize: 16,
-    color: '#0782F9',
+    color: '#0d4023',
     fontWeight: '700',
  },
  image:{
